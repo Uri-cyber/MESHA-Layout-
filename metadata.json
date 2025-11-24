@@ -1,0 +1,7 @@
+{
+  "name": "MESHA - Weather Damage Recovery",
+  "description": "A warm, supportive guide for homeowners recovering from property damage. Encouraging, professional, and clear.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
