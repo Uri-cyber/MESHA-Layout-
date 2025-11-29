@@ -4,7 +4,7 @@ import { MobileLayout, Header, Tabs, Card, Badge, ProgressBar, Button } from '..
 import { ScreenName, Deadline, Contractor } from '../types';
 import { 
   CheckCircle, Circle, FileText, Building, Phone, Mail, Plus,
-  AlertCircle, Clock, Shield, Star, MapPin, ShieldCheck
+  AlertCircle, Clock, Shield, Star, MapPin, ShieldCheck, Settings
 } from 'lucide-react';
 
 interface Props {
@@ -77,7 +77,11 @@ export const ClaimDetailScreen: React.FC<Props> = ({ onNavigate }) => {
         subtitle="Miami, FL" 
         showBack 
         onBack={() => onNavigate('dashboard')}
-        rightAction={<Badge label="Active" variant="success" />}
+        rightAction={
+            <button onClick={() => onNavigate('edit-claim')} className="p-2 text-stone-400 hover:text-stone-600">
+                <Settings size={22} />
+            </button>
+        }
       />
 
       <div className="bg-white border-b border-stone-100 px-6 py-4">
@@ -167,7 +171,7 @@ export const ClaimDetailScreen: React.FC<Props> = ({ onNavigate }) => {
              <Card>
                 <div className="flex justify-between items-start mb-6">
                     <h3 className="text-lg font-bold text-stone-800">Policy Details</h3>
-                    <Button variant="ghost" className="!p-2 h-8 text-xs">Edit</Button>
+                    <Button variant="ghost" className="!p-2 h-8 text-xs font-bold" onClick={() => onNavigate('edit-insurance')}>Edit</Button>
                 </div>
                 <div className="space-y-4">
                     <div className="p-4 bg-stone-50 rounded-xl flex items-center gap-3">
@@ -209,7 +213,7 @@ export const ClaimDetailScreen: React.FC<Props> = ({ onNavigate }) => {
             <div className="space-y-4 animate-in fade-in">
                  <div className="flex justify-between items-center mb-2">
                     <h3 className="font-bold text-stone-800">Contractor Bids</h3>
-                    <button className="text-brand-600 text-sm font-bold flex items-center gap-1" onClick={() => onNavigate('contractor-detail')}><Plus size={16}/> Add Bid</button>
+                    <button className="text-brand-600 text-sm font-bold flex items-center gap-1" onClick={() => onNavigate('add-contractor')}><Plus size={16}/> Add Bid</button>
                 </div>
                 {contractors.map(contractor => (
                     <Card key={contractor.id} className="!p-4">

@@ -31,6 +31,9 @@ import { ForumFeedScreen } from './screens/ForumFeedScreen';
 import { ForumPostDetailScreen } from './screens/ForumPostDetailScreen';
 import { ForumCreatePostScreen } from './screens/ForumCreatePostScreen';
 import { ChatScreen } from './screens/ChatScreen';
+import { EditInsuranceScreen } from './screens/EditInsuranceScreen';
+import { EditClaimScreen } from './screens/EditClaimScreen';
+import { AddContractorScreen } from './screens/AddContractorScreen';
 
 const MOCK_POSTS: ForumPost[] = [
   {
@@ -118,17 +121,20 @@ const App: React.FC = () => {
       case 'phase-details': return <PhaseDetailsScreen onNavigate={setCurrentScreen} />;
       case 'new-claim': return <NewClaimScreen onNavigate={setCurrentScreen} />;
       case 'claim-detail': return <ClaimDetailScreen onNavigate={setCurrentScreen} />;
+      case 'edit-claim': return <EditClaimScreen onNavigate={setCurrentScreen} />;
       case 'documents': return <DocumentsScreen onNavigate={setCurrentScreen} />;
       case 'document-upload': return <DocumentUploadScreen onNavigate={setCurrentScreen} />;
       case 'document-viewer': return <DocumentViewerScreen onNavigate={setCurrentScreen} />;
       case 'contractors': return <ContractorsScreen onNavigate={setCurrentScreen} />;
       case 'contractor-detail': return <ContractorDetailScreen onNavigate={setCurrentScreen} />;
+      case 'add-contractor': return <AddContractorScreen onNavigate={setCurrentScreen} />;
       case 'chat': return <ChatScreen onNavigate={setCurrentScreen} />;
       case 'deadlines': return <DeadlinesScreen onNavigate={setCurrentScreen} />;
       case 'add-deadline': return <AddDeadlineScreen onNavigate={setCurrentScreen} />;
       case 'form-builder': return <FormBuilderScreen onNavigate={setCurrentScreen} />;
       case 'form-submission': return <FormSubmissionScreen onNavigate={setCurrentScreen} />;
       case 'insurance-info': return <InsuranceInfoScreen onNavigate={setCurrentScreen} />;
+      case 'edit-insurance': return <EditInsuranceScreen onNavigate={setCurrentScreen} />;
       case 'resources': return <ResourcesScreen onNavigate={setCurrentScreen} />;
       case 'profile': return <ProfileScreen onNavigate={setCurrentScreen} />;
       case 'personal-details': return <PersonalDetailsScreen onNavigate={setCurrentScreen} />;

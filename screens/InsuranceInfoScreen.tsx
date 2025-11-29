@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { MobileLayout, Header, Card, Button } from '../components/Common';
 import { ScreenName } from '../types';
@@ -14,7 +15,15 @@ export const InsuranceInfoScreen: React.FC<Props> = ({ onNavigate }) => {
         title="Insurance Information" 
         showBack 
         onBack={() => onNavigate('claim-detail')}
-        rightAction={<Button variant="ghost" className="!text-white !p-0">Edit</Button>}
+        rightAction={
+          <Button 
+            variant="ghost" 
+            className="!text-stone-400 hover:!text-brand-600 !p-0 font-bold text-sm" 
+            onClick={() => onNavigate('edit-insurance')}
+          >
+            Edit
+          </Button>
+        }
       />
 
       <div className="flex-1 px-6 py-6 overflow-y-auto space-y-6">

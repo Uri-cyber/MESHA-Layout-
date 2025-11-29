@@ -13,7 +13,7 @@ export const ContractorsScreen: React.FC<Props> = ({ onNavigate }) => {
     <MobileLayout>
       <Header 
         title="Contractors" 
-        rightAction={<button onClick={() => onNavigate('contractor-detail')} className="text-brand-600 font-bold text-sm">Add</button>}
+        rightAction={<button onClick={() => onNavigate('add-contractor')} className="text-brand-600 font-bold text-sm">Add</button>}
       />
       
       <div className="flex-1 overflow-y-auto px-6 pb-28 space-y-4 pt-2">
