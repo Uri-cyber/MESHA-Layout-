@@ -21,6 +21,8 @@ import { FormSubmissionScreen } from './screens/FormSubmissionScreen';
 import { InsuranceInfoScreen } from './screens/InsuranceInfoScreen';
 import { ResourcesScreen } from './screens/ResourcesScreen';
 import { ProfileScreen } from './screens/ProfileScreen';
+import { PersonalDetailsScreen } from './screens/PersonalDetailsScreen';
+import { PropertyDetailsScreen } from './screens/PropertyDetailsScreen';
 import { NotificationsScreen } from './screens/NotificationsScreen';
 import { AdminDashboardScreen } from './screens/AdminDashboardScreen';
 import { AdminUsersScreen } from './screens/AdminUsersScreen';
@@ -125,6 +127,8 @@ const App: React.FC = () => {
       case 'insurance-info': return <InsuranceInfoScreen onNavigate={setCurrentScreen} />;
       case 'resources': return <ResourcesScreen onNavigate={setCurrentScreen} />;
       case 'profile': return <ProfileScreen onNavigate={setCurrentScreen} />;
+      case 'personal-details': return <PersonalDetailsScreen onNavigate={setCurrentScreen} />;
+      case 'property-details': return <PropertyDetailsScreen onNavigate={setCurrentScreen} />;
       case 'notifications': return <NotificationsScreen onNavigate={setCurrentScreen} />;
       case 'admin-dashboard': return <AdminDashboardScreen onNavigate={setCurrentScreen} />;
       case 'admin-users': return <AdminUsersScreen onNavigate={setCurrentScreen} />;

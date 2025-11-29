@@ -9,7 +9,7 @@ export type ScreenName =
   | 'form-builder' | 'form-submission'
   | 'insurance-info'
   | 'resources'
-  | 'profile'
+  | 'profile' | 'personal-details' | 'property-details'
   | 'notifications'
   | 'admin-users' | 'admin-dashboard'
   | 'forum-feed' | 'forum-post' | 'forum-create-post';

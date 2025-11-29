@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { MobileLayout, BottomNav, Header, Button } from '../components/Common';
 import { ScreenName } from '../types';
@@ -12,16 +13,16 @@ export const ProfileScreen: React.FC<Props> = ({ onNavigate }) => {
     {
         title: "Account",
         items: [
-            { icon: User, label: "Personal Information", color: "text-blue-500", bg: "bg-blue-50" },
-            { icon: Home, label: "Property Details", color: "text-brand-500", bg: "bg-brand-50" },
-            { icon: Shield, label: "Insurance Information", color: "text-calm-600", bg: "bg-calm-50" },
+            { icon: User, label: "Personal Information", color: "text-blue-500", bg: "bg-blue-50", action: () => onNavigate('personal-details') },
+            { icon: Home, label: "Property Details", color: "text-brand-500", bg: "bg-brand-50", action: () => onNavigate('property-details') },
+            { icon: Shield, label: "Insurance Information", color: "text-calm-600", bg: "bg-calm-50", action: () => onNavigate('insurance-info') },
         ]
     },
     {
         title: "Preferences",
         items: [
-            { icon: Bell, label: "Notifications", color: "text-stone-600", bg: "bg-stone-100", value: "On" },
-            { icon: Globe, label: "Language", color: "text-stone-600", bg: "bg-stone-100", value: "English" },
+            { icon: Bell, label: "Notifications", color: "text-stone-600", bg: "bg-stone-100", value: "On", action: () => onNavigate('notifications') },
+            { icon: Globe, label: "Language", color: "text-stone-600", bg: "bg-stone-100", value: "English", action: () => {} },
         ]
     }
   ];
@@ -54,6 +55,7 @@ export const ProfileScreen: React.FC<Props> = ({ onNavigate }) => {
                         {section.items.map((item, iIdx) => (
                             <button 
                                 key={iIdx} 
+                                onClick={item.action}
                                 className={`w-full flex items-center gap-4 p-5 hover:bg-stone-50 transition-colors text-left ${iIdx !== section.items.length - 1 ? 'border-b border-stone-50' : ''}`}
                             >
                                 <div className={`w-10 h-10 rounded-2xl ${item.bg} ${item.color} flex items-center justify-center shrink-0`}>
