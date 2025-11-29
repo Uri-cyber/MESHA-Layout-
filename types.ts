@@ -1,6 +1,6 @@
 
 export type ScreenName =
-  | 'onboarding' | 'login' | 'register'
+  | 'onboarding' | 'login' | 'register' | 'forgot-password'
   | 'dashboard' | 'phase-timeline' | 'phase-details'
   | 'new-claim' | 'claim-detail'
   | 'documents' | 'document-upload' | 'document-viewer'

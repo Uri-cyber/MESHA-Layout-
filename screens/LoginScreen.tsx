@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { MobileLayout, Button, Input } from '../components/Common';
 import { ScreenName } from '../types';
@@ -41,7 +42,12 @@ export const LoginScreen: React.FC<Props> = ({ onNavigate }) => {
            />
 
            <div className="flex justify-end">
-              <button className="text-sm font-bold text-stone-400 hover:text-stone-600">Forgot password?</button>
+              <button 
+                onClick={() => onNavigate('forgot-password')}
+                className="text-sm font-bold text-stone-400 hover:text-stone-600"
+              >
+                Forgot password?
+              </button>
            </div>
 
            <Button 

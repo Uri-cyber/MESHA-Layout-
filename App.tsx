@@ -4,6 +4,7 @@ import { ScreenName, ForumPost } from './types';
 import { OnboardingScreen } from './screens/OnboardingScreen';
 import { LoginScreen } from './screens/LoginScreen';
 import { RegisterScreen } from './screens/RegisterScreen';
+import { ForgotPasswordScreen } from './screens/ForgotPasswordScreen';
 import { DashboardScreen } from './screens/DashboardScreen';
 import { PhaseTimelineScreen } from './screens/PhaseTimelineScreen';
 import { PhaseDetailsScreen } from './screens/PhaseDetailsScreen';
@@ -107,6 +108,7 @@ const App: React.FC = () => {
       case 'onboarding': return <OnboardingScreen onNavigate={setCurrentScreen} />;
       case 'login': return <LoginScreen onNavigate={setCurrentScreen} />;
       case 'register': return <RegisterScreen onNavigate={setCurrentScreen} />;
+      case 'forgot-password': return <ForgotPasswordScreen onNavigate={setCurrentScreen} />;
       case 'dashboard': return <DashboardScreen onNavigate={setCurrentScreen} />;
       case 'phase-timeline': return <PhaseTimelineScreen onNavigate={setCurrentScreen} />;
       case 'phase-details': return <PhaseDetailsScreen onNavigate={setCurrentScreen} />;
