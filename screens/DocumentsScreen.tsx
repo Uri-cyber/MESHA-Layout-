@@ -1,7 +1,8 @@
+
 import React, { useState } from 'react';
 import { MobileLayout, BottomNav, Header, Card, Badge, Button } from '../components/Common';
 import { ScreenName } from '../types';
-import { Search, Filter, Grid, List, Plus, FileText, Image, Trash2, Eye } from 'lucide-react';
+import { Search, Filter, Grid, List, Plus, FileText, Image, Trash2, Eye, ClipboardList, ChevronRight } from 'lucide-react';
 
 interface Props {
   onNavigate: (screen: ScreenName) => void;
@@ -60,6 +61,36 @@ export const DocumentsScreen: React.FC<Props> = ({ onNavigate }) => {
       </div>
 
       <div className="flex-1 overflow-y-auto px-4 py-4 pb-24">
+         {/* Required Forms Section */}
+         <div className="mb-6">
+            <div className="flex items-center gap-2 mb-3 px-1">
+                <ClipboardList size={16} className="text-brand-500" />
+                <h3 className="text-xs font-bold text-stone-500 uppercase tracking-wider">Required Forms</h3>
+            </div>
+            <div 
+                onClick={() => onNavigate('user-form')}
+                className="bg-brand-50 border border-brand-100 p-4 rounded-2xl flex items-center justify-between cursor-pointer hover:bg-brand-100 transition-colors group"
+            >
+                <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-brand-500 shadow-sm">
+                        <FileText size={20} />
+                    </div>
+                    <div>
+                        <p className="font-bold text-brand-900 text-sm">Personal Property Inventory</p>
+                        <p className="text-xs text-brand-700">Due: Oct 28 • Not Started</p>
+                    </div>
+                </div>
+                <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-brand-400 group-hover:translate-x-1 transition-transform">
+                    <ChevronRight size={18} />
+                </div>
+            </div>
+         </div>
+
+         <div className="flex items-center gap-2 mb-3 px-1">
+            <FileText size={16} className="text-stone-400" />
+            <h3 className="text-xs font-bold text-stone-500 uppercase tracking-wider">My Files</h3>
+         </div>
+
          <div className={`grid gap-4 ${viewMode === 'grid' ? 'grid-cols-2' : 'grid-cols-1'}`}>
             {docs.map((doc) => (
                 <Card key={doc.id} className="!p-4 hover:border-blue-400 cursor-pointer group" onClick={() => onNavigate('document-viewer')}>

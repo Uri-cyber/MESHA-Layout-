@@ -5,6 +5,26 @@ import {
 } from 'lucide-react';
 import { ScreenName } from '../types';
 
+// --- Custom Icons ---
+const DamagedHomeIcon = ({ size = 24, strokeWidth = 2, className = "" }: { size?: number, strokeWidth?: number, className?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth={strokeWidth} 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+    <polyline points="9 22 9 12 15 12 15 22" />
+    <path d="M11 5L8 10L10 12L7 16" /> {/* Crack line */}
+  </svg>
+);
+
 // --- Layout Wrapper ---
 export const MobileLayout: React.FC<{ children: ReactNode; className?: string }> = ({ children, className = "" }) => {
   return (
@@ -66,7 +86,7 @@ interface BottomNavProps {
 
 export const BottomNav: React.FC<BottomNavProps> = ({ currentScreen, onNavigate }) => {
   const navItems = [
-    { id: 'dashboard', icon: Home, label: 'Home' },
+    { id: 'dashboard', icon: DamagedHomeIcon, label: 'Home' },
     { id: 'documents', icon: FileText, label: 'Docs' },
     { id: 'forum-feed', icon: MessageCircle, label: 'Community' },
     { id: 'contractors', icon: Users, label: 'Contractors' },

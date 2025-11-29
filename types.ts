@@ -6,13 +6,13 @@ export type ScreenName =
   | 'documents' | 'document-upload' | 'document-viewer'
   | 'contractors' | 'contractor-detail' | 'add-contractor'
   | 'deadlines' | 'add-deadline'
-  | 'form-builder' | 'form-submission'
+  | 'form-builder' | 'form-submission' | 'user-form'
   | 'insurance-info' | 'edit-insurance'
   | 'resources'
   | 'profile' | 'personal-details' | 'property-details'
   | 'notifications'
   | 'admin-users' | 'admin-dashboard'
-  | 'forum-feed' | 'forum-post' | 'forum-create-post'
+  | 'forum-feed' | 'forum-post' | 'forum-create-post' | 'forum-my-activity'
   | 'chat';
 
 export interface User {
@@ -73,4 +73,21 @@ export interface ForumPost {
   comments: number;
   timeAgo: string;
   category: 'Support' | 'Insurance' | 'Repairs' | 'General';
+}
+
+export interface FormField {
+  id: string;
+  type: 'text' | 'number' | 'date' | 'textarea' | 'select' | 'checkbox';
+  label: string;
+  placeholder?: string;
+  required: boolean;
+  options?: string[]; // For select inputs
+}
+
+export interface FormTemplate {
+  id: string;
+  title: string;
+  description: string;
+  fields: FormField[];
+  status: 'active' | 'draft';
 }

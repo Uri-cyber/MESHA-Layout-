@@ -19,6 +19,7 @@ import { DeadlinesScreen } from './screens/DeadlinesScreen';
 import { AddDeadlineScreen } from './screens/AddDeadlineScreen';
 import { FormBuilderScreen } from './screens/FormBuilderScreen';
 import { FormSubmissionScreen } from './screens/FormSubmissionScreen';
+import { UserFormScreen } from './screens/UserFormScreen';
 import { InsuranceInfoScreen } from './screens/InsuranceInfoScreen';
 import { ResourcesScreen } from './screens/ResourcesScreen';
 import { ProfileScreen } from './screens/ProfileScreen';
@@ -30,6 +31,7 @@ import { AdminUsersScreen } from './screens/AdminUsersScreen';
 import { ForumFeedScreen } from './screens/ForumFeedScreen';
 import { ForumPostDetailScreen } from './screens/ForumPostDetailScreen';
 import { ForumCreatePostScreen } from './screens/ForumCreatePostScreen';
+import { ForumMyActivityScreen } from './screens/ForumMyActivityScreen';
 import { ChatScreen } from './screens/ChatScreen';
 import { EditInsuranceScreen } from './screens/EditInsuranceScreen';
 import { EditClaimScreen } from './screens/EditClaimScreen';
@@ -49,7 +51,7 @@ const MOCK_POSTS: ForumPost[] = [
   },
   {
     id: '2',
-    author: 'Sarah J.',
+    author: 'Sarah Johnson',
     phaseTag: 'Phase 1',
     title: 'Feeling overwhelmed by the debris',
     content: 'Just started the cleanup process today. It feels like it never ends. Any tips for staying motivated when looking at this mess?',
@@ -133,6 +135,7 @@ const App: React.FC = () => {
       case 'add-deadline': return <AddDeadlineScreen onNavigate={setCurrentScreen} />;
       case 'form-builder': return <FormBuilderScreen onNavigate={setCurrentScreen} />;
       case 'form-submission': return <FormSubmissionScreen onNavigate={setCurrentScreen} />;
+      case 'user-form': return <UserFormScreen onNavigate={setCurrentScreen} />;
       case 'insurance-info': return <InsuranceInfoScreen onNavigate={setCurrentScreen} />;
       case 'edit-insurance': return <EditInsuranceScreen onNavigate={setCurrentScreen} />;
       case 'resources': return <ResourcesScreen onNavigate={setCurrentScreen} />;
@@ -160,6 +163,13 @@ const App: React.FC = () => {
         <ForumCreatePostScreen 
           onNavigate={setCurrentScreen} 
           onSubmit={handleAddPost} 
+        />
+      );
+      case 'forum-my-activity': return (
+        <ForumMyActivityScreen 
+          onNavigate={setCurrentScreen} 
+          posts={posts}
+          onSelectPost={handleSelectPost}
         />
       );
       

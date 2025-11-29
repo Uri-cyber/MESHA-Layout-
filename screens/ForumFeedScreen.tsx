@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { MobileLayout, BottomNav, Header, Tabs } from '../components/Common';
 import { ForumPostCard } from '../components/ForumPostCard';
 import { ScreenName, ForumPost } from '../types';
-import { Search, Plus, Filter } from 'lucide-react';
+import { Search, Plus, Filter, UserCircle } from 'lucide-react';
 
 interface Props {
   onNavigate: (screen: ScreenName) => void;
@@ -30,9 +30,18 @@ export const ForumFeedScreen: React.FC<Props> = ({ onNavigate, posts, onSelectPo
         title="Community" 
         subtitle="Share, learn, and recover together."
         rightAction={
-            <button className="p-2 bg-white rounded-full text-stone-500 hover:text-brand-500 shadow-sm transition-colors border border-stone-100">
-                <Filter size={20} />
-            </button>
+            <div className="flex gap-2">
+                <button 
+                    onClick={() => onNavigate('forum-my-activity')}
+                    className="p-2 bg-brand-50 rounded-full text-brand-600 hover:bg-brand-100 shadow-sm transition-colors border border-brand-100"
+                    title="My Activity"
+                >
+                    <UserCircle size={20} />
+                </button>
+                <button className="p-2 bg-white rounded-full text-stone-500 hover:text-brand-500 shadow-sm transition-colors border border-stone-100">
+                    <Filter size={20} />
+                </button>
+            </div>
         }
       />
 
@@ -58,7 +67,7 @@ export const ForumFeedScreen: React.FC<Props> = ({ onNavigate, posts, onSelectPo
                     post={post} 
                     onClick={() => onSelectPost(post)}
                     onLike={() => {
-                        // Handle like logic
+                        // Handle like logic here, likely updating parent state
                     }}
                     onComment={() => onSelectPost(post)}
                 />

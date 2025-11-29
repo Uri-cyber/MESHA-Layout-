@@ -1,8 +1,9 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { MobileLayout, Header } from '../components/Common';
 import { ScreenName } from '../types';
-import { Send, Phone, MoreVertical } from 'lucide-react';
+import { Send, Phone, MoreVertical, Sparkles, Loader2, X } from 'lucide-react';
+import { GoogleGenAI } from "@google/genai";
 
 interface Props {
   onNavigate: (screen: ScreenName) => void;
@@ -13,13 +14,57 @@ export const ChatScreen: React.FC<Props> = ({ onNavigate }) => {
     { id: 1, text: "Hi Sarah, I've reviewed the photos you sent.", sender: 'them', time: '10:30 AM' },
     { id: 2, text: "The damage looks extensive but repairable. I can stop by tomorrow for a full inspection.", sender: 'them', time: '10:31 AM' },
     { id: 3, text: "That would be great! What time works for you?", sender: 'me', time: '10:35 AM' },
+    { id: 4, text: "I can be there between 8 AM and 10 AM. Does that work?", sender: 'them', time: '10:36 AM' },
   ]);
   const [inputText, setInputText] = useState('');
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, suggestions]);
 
   const handleSend = () => {
     if (!inputText.trim()) return;
     setMessages([...messages, { id: Date.now(), text: inputText, sender: 'me', time: 'Just now' }]);
     setInputText('');
+    setSuggestions([]); // Clear suggestions after sending
+  };
+
+  const handleGenerateReplies = async () => {
+    setIsGenerating(true);
+    setSuggestions([]);
+    
+    try {
+        // Construct conversation history for context
+        const history = messages.map(m => `${m.sender === 'me' ? 'Homeowner' : 'Contractor'}: ${m.text}`).join('\n');
+        
+        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+        const response = await ai.models.generateContent({
+            model: 'gemini-2.5-flash',
+            contents: `Based on this conversation between a homeowner and a contractor, suggest 3 distinct, professional, and concise short replies for the homeowner.
+            
+            Conversation:
+            ${history}
+            
+            Output format: Just the 3 replies separated by pipes (|). No numbering or extra text.
+            Example: Yes, that works.|Could we do later?|Please send the estimate first.`,
+        });
+
+        if (response.text) {
+            const replies = response.text.split('|').map(s => s.trim()).filter(s => s.length > 0);
+            setSuggestions(replies.slice(0, 3));
+        }
+    } catch (e) {
+        console.error("AI Error:", e);
+    } finally {
+        setIsGenerating(false);
+    }
   };
 
   return (
@@ -52,10 +97,38 @@ export const ChatScreen: React.FC<Props> = ({ onNavigate }) => {
             </div>
           </div>
         ))}
+        <div ref={messagesEndRef} />
       </div>
 
-      <div className="p-4 bg-white border-t border-stone-100">
+      {/* Smart Suggestions Area */}
+      {suggestions.length > 0 && (
+          <div className="bg-stone-50 px-4 py-2 flex gap-2 overflow-x-auto scrollbar-hide border-t border-stone-100">
+              <button onClick={() => setSuggestions([])} className="p-1.5 bg-stone-200 rounded-full text-stone-500 shrink-0">
+                  <X size={14} />
+              </button>
+              {suggestions.map((suggestion, idx) => (
+                  <button 
+                    key={idx}
+                    onClick={() => setInputText(suggestion)}
+                    className="px-4 py-2 bg-white border border-brand-200 text-brand-700 text-xs font-bold rounded-xl whitespace-nowrap shadow-sm hover:bg-brand-50 active:scale-95 transition-all"
+                  >
+                    {suggestion}
+                  </button>
+              ))}
+          </div>
+      )}
+
+      <div className="p-4 bg-white border-t border-stone-100 relative">
         <div className="flex items-center gap-2">
+          <button 
+             onClick={handleGenerateReplies}
+             disabled={isGenerating}
+             className={`p-3 rounded-full transition-all ${isGenerating ? 'bg-stone-100 text-stone-400' : 'bg-brand-50 text-brand-600 hover:bg-brand-100'}`}
+             title="Generate AI Suggestions"
+          >
+             {isGenerating ? <Loader2 size={20} className="animate-spin" /> : <Sparkles size={20} />}
+          </button>
+          
           <input 
             type="text" 
             value={inputText}

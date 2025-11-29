@@ -24,14 +24,14 @@ export const ForumPostCard: React.FC<ForumPostCardProps> = ({ post, onClick, onL
   return (
     <Card onClick={onClick} className="!p-5 cursor-pointer group hover:border-brand-200 hover:shadow-md transition-all relative">
       <div className="flex justify-between items-start mb-3">
-        <div className="flex items-center gap-2">
-          <div className="w-9 h-9 rounded-full bg-stone-100 border border-stone-200 flex items-center justify-center text-xs font-bold text-stone-600">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-stone-100 border border-stone-200 flex items-center justify-center text-sm font-bold text-stone-600 shrink-0">
             {post.author.charAt(0)}
           </div>
-          <div>
-            <p className="text-sm font-bold text-stone-800 leading-none mb-0.5">{post.author}</p>
-            <p className="text-[10px] font-bold text-stone-400 flex items-center gap-1">
-              {post.timeAgo} • <span className="text-brand-600 bg-brand-50 px-1 rounded">{post.phaseTag}</span>
+          <div className="flex flex-col">
+            <p className="text-sm font-bold text-stone-800 leading-tight">{post.author}</p>
+            <p className="text-[10px] font-bold text-stone-400 flex items-center gap-1 mt-0.5">
+              {post.timeAgo} • <span className="text-brand-600 bg-brand-50 px-1.5 py-0.5 rounded text-[9px]">{post.phaseTag || 'General'}</span>
             </p>
           </div>
         </div>
@@ -40,12 +40,16 @@ export const ForumPostCard: React.FC<ForumPostCardProps> = ({ post, onClick, onL
         </span>
       </div>
 
-      <h3 className="font-bold text-stone-800 text-base mb-2 group-hover:text-brand-600 transition-colors leading-tight">{post.title}</h3>
-      <p className="text-sm text-stone-500 line-clamp-2 leading-relaxed mb-4 font-medium">{post.content}</p>
+      <h3 className="font-bold text-stone-800 text-base mb-2 group-hover:text-brand-600 transition-colors leading-tight line-clamp-2">
+        {post.title}
+      </h3>
+      <p className="text-sm text-stone-500 line-clamp-3 leading-relaxed mb-4 font-medium">
+        {post.content}
+      </p>
 
-      <div className="flex items-center gap-3 mt-4">
+      <div className="flex items-center gap-3 mt-auto">
         <button 
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-stone-50 hover:bg-rose-50 text-stone-500 hover:text-rose-600 transition-all group/btn"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-stone-50 hover:bg-rose-50 text-stone-500 hover:text-rose-600 transition-all group/btn active:scale-95"
           onClick={(e) => {
             e.stopPropagation();
             onLike && onLike();
@@ -56,7 +60,7 @@ export const ForumPostCard: React.FC<ForumPostCardProps> = ({ post, onClick, onL
         </button>
         
         <button 
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-stone-50 hover:bg-brand-50 text-stone-500 hover:text-brand-600 transition-all group/btn"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-stone-50 hover:bg-brand-50 text-stone-500 hover:text-brand-600 transition-all group/btn active:scale-95"
           onClick={(e) => {
             e.stopPropagation();
             onComment && onComment();

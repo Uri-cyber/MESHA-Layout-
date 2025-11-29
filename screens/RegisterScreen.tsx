@@ -1,13 +1,49 @@
-import React from 'react';
-import { MobileLayout, Button, Header } from '../components/Common';
+
+import React, { useState } from 'react';
+import { MobileLayout, Button, Header, Input } from '../components/Common';
 import { ScreenName } from '../types';
-import { HeartHandshake } from 'lucide-react';
+import { HeartHandshake, Lock, AlertCircle } from 'lucide-react';
 
 interface Props {
   onNavigate: (screen: ScreenName) => void;
 }
 
 export const RegisterScreen: React.FC<Props> = ({ onNavigate }) => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    password: '',
+    confirmPassword: ''
+  });
+  const [error, setError] = useState('');
+
+  const handleChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    if (error) setError('');
+  };
+
+  const handleRegister = () => {
+    if (!formData.email || !formData.password || !formData.confirmPassword) {
+      setError('Please fill in all required fields.');
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match. Please try again.');
+      return;
+    }
+
+    if (formData.password.length < 8) {
+      setError('Password must be at least 8 characters long.');
+      return;
+    }
+
+    // Proceed to onboarding
+    onNavigate('onboarding');
+  };
+
   return (
     <MobileLayout className="bg-white">
       <Header showBack onBack={() => onNavigate('login')} transparent />
@@ -25,30 +61,64 @@ export const RegisterScreen: React.FC<Props> = ({ onNavigate }) => {
 
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
-             <div className="space-y-2">
-                <label className="text-xs font-bold text-stone-400 uppercase tracking-wider ml-1">First Name</label>
-                <input type="text" className="w-full p-4 bg-stone-50 rounded-2xl border-2 border-transparent focus:border-brand-200 focus:bg-white outline-none transition-all font-medium" placeholder="Jane" />
-             </div>
-             <div className="space-y-2">
-                <label className="text-xs font-bold text-stone-400 uppercase tracking-wider ml-1">Last Name</label>
-                <input type="text" className="w-full p-4 bg-stone-50 rounded-2xl border-2 border-transparent focus:border-brand-200 focus:bg-white outline-none transition-all font-medium" placeholder="Doe" />
-             </div>
+             <Input 
+                label="First Name" 
+                placeholder="Jane" 
+                value={formData.firstName}
+                onChange={(e) => handleChange('firstName', e.target.value)}
+             />
+             <Input 
+                label="Last Name" 
+                placeholder="Doe"
+                value={formData.lastName}
+                onChange={(e) => handleChange('lastName', e.target.value)}
+             />
           </div>
           
-          <div className="space-y-2">
-            <label className="text-xs font-bold text-stone-400 uppercase tracking-wider ml-1">Phone</label>
-            <input type="tel" className="w-full p-4 bg-stone-50 rounded-2xl border-2 border-transparent focus:border-brand-200 focus:bg-white outline-none transition-all font-medium" placeholder="(555) 123-4567" />
-          </div>
+          <Input 
+            label="Phone" 
+            type="tel" 
+            placeholder="(555) 123-4567"
+            value={formData.phone}
+            onChange={(e) => handleChange('phone', e.target.value)}
+          />
           
-          <div className="space-y-2">
-            <label className="text-xs font-bold text-stone-400 uppercase tracking-wider ml-1">Email Address</label>
-            <input type="email" className="w-full p-4 bg-stone-50 rounded-2xl border-2 border-transparent focus:border-brand-200 focus:bg-white outline-none transition-all font-medium" placeholder="jane@example.com" />
+          <Input 
+            label="Email Address" 
+            type="email" 
+            placeholder="jane@example.com"
+            value={formData.email}
+            onChange={(e) => handleChange('email', e.target.value)}
+          />
+
+          <div className="space-y-4 pt-2">
+            <Input 
+              label="Password" 
+              type="password" 
+              icon={<Lock size={20}/>}
+              placeholder="Min. 8 characters"
+              value={formData.password}
+              onChange={(e) => handleChange('password', e.target.value)}
+              className={error && formData.password !== formData.confirmPassword ? 'border-red-300 bg-red-50' : ''}
+            />
+            
+            <Input 
+              label="Confirm Password" 
+              type="password" 
+              icon={<Lock size={20}/>}
+              placeholder="Re-type password"
+              value={formData.confirmPassword}
+              onChange={(e) => handleChange('confirmPassword', e.target.value)}
+              className={error && formData.password !== formData.confirmPassword ? 'border-red-300 bg-red-50' : ''}
+            />
           </div>
 
-          <div className="space-y-2">
-            <label className="text-xs font-bold text-stone-400 uppercase tracking-wider ml-1">Password</label>
-            <input type="password" className="w-full p-4 bg-stone-50 rounded-2xl border-2 border-transparent focus:border-brand-200 focus:bg-white outline-none transition-all font-medium" />
-          </div>
+          {error && (
+            <div className="flex items-center gap-2 text-red-500 bg-red-50 p-3 rounded-xl text-sm font-bold animate-fade-in">
+              <AlertCircle size={18} />
+              {error}
+            </div>
+          )}
 
           <div className="flex items-start gap-3 py-2">
             <input type="checkbox" className="mt-1 w-5 h-5 rounded border-stone-300 text-brand-500 focus:ring-brand-500" />
@@ -57,7 +127,7 @@ export const RegisterScreen: React.FC<Props> = ({ onNavigate }) => {
             </p>
           </div>
 
-          <Button onClick={() => onNavigate('onboarding')}>
+          <Button onClick={handleRegister}>
             Create Account
           </Button>
           
