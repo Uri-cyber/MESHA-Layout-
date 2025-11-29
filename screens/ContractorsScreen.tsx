@@ -32,10 +32,16 @@ export const ContractorsScreen: React.FC<Props> = ({ onNavigate }) => {
                 </div>
             </div>
             <div className="grid grid-cols-2 gap-3 mt-4">
-                <button className="py-2 bg-stone-50 rounded-lg font-bold text-stone-600 text-xs flex items-center justify-center gap-2">
+                <button 
+                  onClick={(e) => { e.stopPropagation(); }}
+                  className="py-2 bg-stone-50 rounded-lg font-bold text-stone-600 text-xs flex items-center justify-center gap-2 hover:bg-stone-100 transition-colors"
+                >
                     <Phone size={14} /> Call
                 </button>
-                <button className="py-2 bg-brand-50 rounded-lg font-bold text-brand-600 text-xs flex items-center justify-center gap-2">
+                <button 
+                  onClick={(e) => { e.stopPropagation(); onNavigate('chat'); }}
+                  className="py-2 bg-brand-50 rounded-lg font-bold text-brand-600 text-xs flex items-center justify-center gap-2 hover:bg-brand-100 transition-colors"
+                >
                     <MessageSquare size={14} /> Message
                 </button>
             </div>

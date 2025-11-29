@@ -5,14 +5,15 @@ export type ScreenName =
   | 'new-claim' | 'claim-detail'
   | 'documents' | 'document-upload' | 'document-viewer'
   | 'contractors' | 'contractor-detail'
-  | 'deadlines'
+  | 'deadlines' | 'add-deadline'
   | 'form-builder' | 'form-submission'
   | 'insurance-info'
   | 'resources'
   | 'profile' | 'personal-details' | 'property-details'
   | 'notifications'
   | 'admin-users' | 'admin-dashboard'
-  | 'forum-feed' | 'forum-post' | 'forum-create-post';
+  | 'forum-feed' | 'forum-post' | 'forum-create-post'
+  | 'chat';
 
 export interface User {
   id: string;

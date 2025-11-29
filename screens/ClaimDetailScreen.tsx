@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { MobileLayout, Header, Tabs, Card, Badge, ProgressBar, Button } from '../components/Common';
 import { ScreenName, Deadline, Contractor } from '../types';
@@ -135,7 +136,7 @@ export const ClaimDetailScreen: React.FC<Props> = ({ onNavigate }) => {
             <div className="space-y-4 animate-in fade-in">
                 <div className="flex justify-between items-center mb-2">
                     <h3 className="font-bold text-stone-800">Upcoming Tasks</h3>
-                    <button className="text-brand-600 text-sm font-bold flex items-center gap-1"><Plus size={16}/> Add</button>
+                    <button onClick={() => onNavigate('add-deadline')} className="text-brand-600 text-sm font-bold flex items-center gap-1"><Plus size={16}/> Add</button>
                 </div>
                 {deadlines.map(task => (
                     <div key={task.id} className={`p-4 rounded-2xl border flex items-start gap-3 ${task.isCompleted ? 'bg-stone-50 border-stone-100 opacity-60' : 'bg-white border-stone-200'}`}>

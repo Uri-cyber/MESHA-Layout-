@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { MobileLayout, Header, Button } from '../components/Common';
 import { ScreenName } from '../types';
@@ -43,7 +44,7 @@ export const ContractorDetailScreen: React.FC<Props> = ({ onNavigate }) => {
             Specializing in storm damage repair for over 15 years. We handle insurance claims directly and ensure your home is restored to better than before.
          </p>
 
-         <Button onClick={() => {}}>Request Estimate</Button>
+         <Button onClick={() => onNavigate('chat')}>Request Estimate</Button>
       </div>
     </MobileLayout>
   );

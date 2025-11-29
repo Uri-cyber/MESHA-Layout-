@@ -16,6 +16,7 @@ import { DocumentViewerScreen } from './screens/DocumentViewerScreen';
 import { ContractorsScreen } from './screens/ContractorsScreen';
 import { ContractorDetailScreen } from './screens/ContractorDetailScreen';
 import { DeadlinesScreen } from './screens/DeadlinesScreen';
+import { AddDeadlineScreen } from './screens/AddDeadlineScreen';
 import { FormBuilderScreen } from './screens/FormBuilderScreen';
 import { FormSubmissionScreen } from './screens/FormSubmissionScreen';
 import { InsuranceInfoScreen } from './screens/InsuranceInfoScreen';
@@ -29,6 +30,7 @@ import { AdminUsersScreen } from './screens/AdminUsersScreen';
 import { ForumFeedScreen } from './screens/ForumFeedScreen';
 import { ForumPostDetailScreen } from './screens/ForumPostDetailScreen';
 import { ForumCreatePostScreen } from './screens/ForumCreatePostScreen';
+import { ChatScreen } from './screens/ChatScreen';
 
 const MOCK_POSTS: ForumPost[] = [
   {
@@ -121,7 +123,9 @@ const App: React.FC = () => {
       case 'document-viewer': return <DocumentViewerScreen onNavigate={setCurrentScreen} />;
       case 'contractors': return <ContractorsScreen onNavigate={setCurrentScreen} />;
       case 'contractor-detail': return <ContractorDetailScreen onNavigate={setCurrentScreen} />;
+      case 'chat': return <ChatScreen onNavigate={setCurrentScreen} />;
       case 'deadlines': return <DeadlinesScreen onNavigate={setCurrentScreen} />;
+      case 'add-deadline': return <AddDeadlineScreen onNavigate={setCurrentScreen} />;
       case 'form-builder': return <FormBuilderScreen onNavigate={setCurrentScreen} />;
       case 'form-submission': return <FormSubmissionScreen onNavigate={setCurrentScreen} />;
       case 'insurance-info': return <InsuranceInfoScreen onNavigate={setCurrentScreen} />;
